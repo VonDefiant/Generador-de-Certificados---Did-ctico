@@ -3,7 +3,7 @@ import { Printer, RefreshCw, Download, ArrowLeft } from 'lucide-react';
 import CertificateForm from './CertificateForm';
 import DocumentPreview from './DocumentPreview';
 import { CertificateData, defaultCertificateData } from '../types';
-import domtoimage from 'dom-to-image';
+import { toPng } from 'html-to-image';
 import { jsPDF } from 'jspdf';
 
 interface DeathCertificateAppProps {
@@ -27,46 +27,22 @@ export default function DeathCertificateApp({ onBack }: DeathCertificateAppProps
 
     setIsExporting(true);
     try {
-      const scale = 2;
-      const param = {
-        height: element.offsetHeight * scale,
-        width: element.offsetWidth * scale,
-        quality: 0.98,
-        style: {
-          transform: `scale(${scale})`,
-          transformOrigin: 'top left',
-          width: `${element.offsetWidth}px`,
-          height: `${element.offsetHeight}px`
-        },
-        bgcolor: '#ffffff'
-      };
-
-      const dataUrl = await domtoimage.toJpeg(element, param);
-      const pdf = new jsPDF({
-        orientation: 'portrait',
-        unit: 'mm',
-        format: 'a4'
-      });
-      
+      const dataUrl = await toPng(element, { quality: 1.0, pixelRatio: 2, backgroundColor: '#ffffff' });
+      const pdf = new jsPDF('p', 'mm', 'a4');
       const imgProps = pdf.getImageProperties(dataUrl);
       const pdfWidth = pdf.internal.pageSize.getWidth();
       const pdfHeight = (imgProps.height * pdfWidth) / imgProps.width;
-      
-      pdf.addImage(dataUrl, 'JPEG', 0, 0, pdfWidth, pdfHeight);
+      pdf.addImage(dataUrl, 'PNG', 0, 0, pdfWidth, pdfHeight);
       pdf.save(`CertificadoDeDefuncion_${data.cui.replace(/\s/g, '') || 'RENAP'}.pdf`);
     } catch (e) {
       console.error("Error generating PDF:", e);
-      // Fallback
-      window.print();
     } finally {
       setIsExporting(false);
     }
   };
 
   const handleReset = () => {
-    if (window.confirm("¿Estás seguro de restablecer todos los valores al ejemplo original?")) {
-      setData(defaultCertificateData);
-    }
+    setData(defaultCertificateData);
   };
 
   return (
