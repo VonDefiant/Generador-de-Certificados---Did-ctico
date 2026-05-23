@@ -1,5 +1,5 @@
 import React from 'react';
-import QRCode from 'react-qr-code';
+import Barcode from 'react-barcode';
 import { CertificateData } from '../types';
 
 interface DocumentPreviewProps {
@@ -157,11 +157,13 @@ export default function DocumentPreview({ data }: DocumentPreviewProps) {
       {/* Footer / Barcodes */}
       <div className="mt-auto grid grid-cols-2 text-[0.7rem] items-end pb-8">
         <div>
-          <div className="-ml-2 mb-1 p-1 bg-white inline-block">
-            <QRCode 
-              value={`https://renap.gob.gt/verificador?id=${data.idInferior}`}
-              size={64}
-              level="M"
+          <div className="-ml-3 mb-1 p-1 bg-white inline-block">
+            <Barcode 
+              value={data.idInferior}
+              width={1}
+              height={40}
+              displayValue={false}
+              margin={0}
             />
           </div>
           <p className="font-bold mt-1">ID: {data.idInferior}</p>
