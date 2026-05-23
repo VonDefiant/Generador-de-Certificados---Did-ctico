@@ -36,7 +36,7 @@ export default function DocumentPreview({ data }: DocumentPreviewProps) {
         <div className="absolute left-0 top-0">
           {/* RENAP logotype */}
           <img 
-            src="https://raw.githubusercontent.com/VonDefiant/CERTIFICADO-DE-DEFUNCION-EDUCATIVO/033cef2151a3b3faee21e3c110bae80ccb4e1dab/187128-removebg-preview.png" 
+            src="/logo-renap.png" 
             alt="RENAP Logo" 
             className="h-10 object-contain mix-blend-multiply" 
             referrerPolicy="no-referrer"
@@ -47,7 +47,7 @@ export default function DocumentPreview({ data }: DocumentPreviewProps) {
           <div className="text-[1.35rem] font-medium text-[#c00000] tracking-wide mb-1 opacity-90">{data.correlativoRENAP}</div>
           {/* Decorative stamp image */}
           <img 
-            src="https://raw.githubusercontent.com/VonDefiant/CERTIFICADO-DE-DEFUNCION-EDUCATIVO/033cef2151a3b3faee21e3c110bae80ccb4e1dab/Screenshot_20260522-174851.png" 
+            src="/sello-dorado.png" 
             alt="Timbre RENAP" 
             className="w-[3.5rem] ml-auto object-contain mix-blend-multiply mt-2"
             referrerPolicy="no-referrer"

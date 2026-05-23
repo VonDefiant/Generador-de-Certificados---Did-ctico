@@ -18,7 +18,7 @@ export default function BirthCertificatePreview({ data }: Props) {
       <div className="flex justify-between items-start mb-[15px]">
         <div className="flex flex-col w-[350px]">
            <img 
-             src="https://raw.githubusercontent.com/VonDefiant/CERTIFICADO-DE-DEFUNCION-EDUCATIVO/033cef2151a3b3faee21e3c110bae80ccb4e1dab/187128-removebg-preview.png" 
+             src="/logo-renap.png" 
              alt="RENAP Logo" 
              className="h-[45px] object-contain object-left mix-blend-multiply" 
              referrerPolicy="no-referrer"
