@@ -157,11 +157,11 @@ export default function DocumentPreview({ data }: DocumentPreviewProps) {
       {/* Footer / Barcodes */}
       <div className="mt-auto grid grid-cols-2 text-[0.7rem] items-end pb-8">
         <div>
-          <div className="-ml-3 mb-1 p-1 bg-white inline-block">
+          <div className="-ml-3 mb-1 bg-white inline-block">
             <Barcode 
               value={data.idInferior}
-              width={1}
-              height={40}
+              width={1.8}
+              height={50}
               displayValue={false}
               margin={0}
             />
