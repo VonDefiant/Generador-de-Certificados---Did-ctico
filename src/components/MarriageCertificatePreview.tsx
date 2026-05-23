@@ -12,8 +12,8 @@ const MarriageCertificatePreview: React.FC<MarriageCertificatePreviewProps> = ({
     <div className="bg-white rounded-[2px] shadow-sm flex flex-col justify-between"
          style={{
            width: '100%',
-           maxWidth: '800px', // A4 aspect ratio width based on height
-           aspectRatio: '1 / 1.414', // A4 size
+           maxWidth: '800px', // Responsive width
+           aspectRatio: '1 / 1.2941', // Letter size (8.5 x 11)
            position: 'relative',
            overflow: 'hidden',
            margin: '0 auto',
@@ -206,12 +206,12 @@ const MarriageCertificatePreview: React.FC<MarriageCertificatePreviewProps> = ({
         </div>
 
         {/* DATOS DEL MATRIMONIO */}
-        <div className="flex mt-[20px] mb-[15px]">
-           <div className="w-[180px] font-bold text-[13px] text-gray-900 shrink-0">
+        <div className="mt-[20px] mb-[15px]">
+           <div className="font-bold text-[13px] text-gray-900 pb-[10px]">
              Datos del Matrimonio
            </div>
            
-           <div className="flex-1 flex flex-col pt-[5px] pl-[10px]">
+           <div className="flex flex-col">
               <div className="flex flex-col items-center">
                  <p className="text-[10px] text-gray-900 relative top-[3px]">{data.lugarMatrimonio}</p>
                  <div className="w-full border-t border-black mb-[2px]"></div>

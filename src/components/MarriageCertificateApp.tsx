@@ -1,5 +1,5 @@
-import React, { useState } from 'react';
-import { ArrowLeft, Download, RotateCcw, FileText } from 'lucide-react';
+import { useState } from 'react';
+import { Printer, RefreshCw, Download, ArrowLeft } from 'lucide-react';
 import MarriageCertificateForm from './MarriageCertificateForm';
 import MarriageCertificatePreview from './MarriageCertificatePreview';
 import { MarriageCertificateData, defaultMarriageCertificateData } from '../types';
@@ -10,18 +10,22 @@ interface MarriageCertificateAppProps {
   onBack: () => void;
 }
 
-const MarriageCertificateApp: React.FC<MarriageCertificateAppProps> = ({ onBack }) => {
+export default function MarriageCertificateApp({ onBack }: MarriageCertificateAppProps) {
   const [data, setData] = useState<MarriageCertificateData>(defaultMarriageCertificateData);
   const [isExporting, setIsExporting] = useState(false);
 
-  const handleExportPDF = async () => {
+  const handleChange = (data: MarriageCertificateData) => {
+    setData(data);
+  };
+
+  const handlePrint = async () => {
     const element = document.getElementById('marriage-preview-container');
     if (!element) return;
 
     setIsExporting(true);
     try {
       const dataUrl = await toPng(element, { quality: 1.0, pixelRatio: 2, backgroundColor: '#ffffff' });
-      const pdf = new jsPDF('p', 'mm', 'a4');
+      const pdf = new jsPDF('p', 'in', 'letter');
       const imgProps = pdf.getImageProperties(dataUrl);
       const pdfWidth = pdf.internal.pageSize.getWidth();
       const pdfHeight = (imgProps.height * pdfWidth) / imgProps.width;
@@ -39,67 +43,67 @@ const MarriageCertificateApp: React.FC<MarriageCertificateAppProps> = ({ onBack 
   };
 
   return (
-    <div className="min-h-screen bg-slate-50 flex flex-col font-sans">
-      <header className="bg-white border-b border-slate-200 sticky top-0 z-50">
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-          <div className="flex items-center justify-between h-16">
-            <div className="flex items-center gap-4">
-              <button 
-                onClick={onBack}
-                className="p-2 hover:bg-slate-100 rounded-full transition-colors flex items-center text-slate-600 hover:text-slate-900"
-              >
-                <ArrowLeft className="w-5 h-5 mr-1" />
-                <span className="font-medium text-sm">Volver</span>
-              </button>
-              <div className="h-6 w-px bg-slate-300 hidden sm:block"></div>
-              <div className="flex items-center gap-2">
-                <FileText className="w-6 h-6 text-indigo-600" />
-                <h1 className="text-xl font-bold text-slate-800 tracking-tight">Certificado de Matrimonio</h1>
-              </div>
-            </div>
-            <div className="flex items-center gap-3">
-              <button 
-                onClick={handleReset}
-                className="flex items-center px-4 py-2 text-sm font-medium text-slate-700 bg-white border border-slate-300 rounded-lg hover:bg-slate-50 active:bg-slate-100 transition-colors shadow-sm"
-              >
-                <RotateCcw className="w-4 h-4 mr-2 text-slate-500" />
-                Restablecer
-              </button>
-              <button 
-                onClick={handleExportPDF}
-                disabled={isExporting}
-                className="flex items-center px-4 py-2 text-sm font-medium text-white bg-indigo-600 rounded-lg hover:bg-indigo-700 active:bg-indigo-800 transition-colors shadow-sm disabled:opacity-70 disabled:cursor-not-allowed"
-              >
-                <Download className="w-4 h-4 mr-2" />
-                {isExporting ? 'Generando PDF...' : 'Exportar PDF'}
-              </button>
-            </div>
+    <div className="h-screen bg-slate-50 flex flex-col overflow-hidden font-sans text-slate-800">
+      {/* Navbar - hidden on print */}
+      <header className="h-16 bg-white border-b border-slate-200 px-4 md:px-8 flex items-center justify-between shadow-sm flex-shrink-0 no-print">
+        <div className="flex items-center gap-3">
+          <button 
+            onClick={onBack}
+            className="p-2 hover:bg-slate-100 rounded-full transition-colors mr-2"
+            title="Volver al menú"
+          >
+            <ArrowLeft className="w-5 h-5 text-slate-600" />
+          </button>
+          <div className="hidden sm:flex w-8 h-8 bg-purple-600 rounded-lg items-center justify-center">
+             <Printer className="w-4 h-4 text-white" />
           </div>
+          <h1 className="text-sm sm:text-lg font-bold tracking-tight text-slate-900">Generador de Certificado de Matrimonio</h1>
+        </div>
+        <div className="flex items-center gap-2 sm:gap-4">
+          <button 
+            onClick={handleReset}
+            className="hidden sm:flex text-xs font-medium text-slate-400 uppercase tracking-widest hover:text-slate-600 items-center gap-2 transition-colors bg-transparent border-none"
+          >
+            <RefreshCw className="w-3 h-3" />
+            Restablecer
+          </button>
+          <button 
+            onClick={handlePrint}
+            className="bg-purple-600 hover:bg-purple-700 text-white px-3 sm:px-5 py-2 rounded-lg text-sm font-semibold transition-colors shadow-sm flex items-center gap-2 disabled:opacity-75 disabled:cursor-not-allowed"
+            disabled={isExporting}
+          >
+            {isExporting ? (
+              <>
+                <Download className="w-4 h-4 animate-bounce" />
+                <span className="hidden sm:inline">Generando...</span>
+              </>
+            ) : (
+              <>
+                <Download className="w-4 h-4" />
+                <span className="hidden sm:inline">Exportar PDF</span>
+              </>
+            )}
+          </button>
         </div>
       </header>
 
-      <main className="flex-1 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8 w-full flex flex-col lg:flex-row gap-8">
-        <section className="w-full lg:w-[450px] shrink-0">
-          <MarriageCertificateForm data={data} onChange={setData} />
-        </section>
-        
-        <section className="flex-1 flex flex-col relative">
-          <div className="sticky top-24">
-            <div className="flex items-center justify-between mb-4">
-              <h2 className="text-lg font-semibold text-slate-800">Vista Previa del Documento</h2>
-              <span className="text-xs font-medium bg-indigo-100 text-indigo-800 px-2.5 py-1 rounded-full uppercase tracking-wider">A4 Size</span>
-            </div>
-            
-            <div className="bg-slate-200/50 p-6 rounded-2xl border border-slate-200 overflow-x-auto flex justify-center shadow-inner">
-              <div id="marriage-preview-container" className="shadow-2xl bg-white origin-top" style={{ width: '800px', transform: 'scale(1)', transformOrigin: 'top center' }}>
-                <MarriageCertificatePreview data={data} />
-              </div>
-            </div>
+      {/* Main Content */}
+      <main className="flex-1 flex flex-col md:flex-row gap-0 overflow-hidden">
+        {/* Left Panel: Editor Form (hidden on print) */}
+        <aside className="w-full md:w-[320px] lg:w-[400px] xl:w-[450px] bg-white border-r border-slate-200 flex flex-col p-4 md:p-6 overflow-y-auto space-y-8 no-print shrink-0 max-h-[50vh] md:max-h-full">
+          <div className="bg-slate-50 border border-slate-100 rounded-lg p-4 text-xs text-slate-500 leading-relaxed italic hidden sm:block">
+            Modifica los valores en el formulario. Los cambios se reflejan en tiempo real. Usa "Exportar PDF" para descargar el documento.
+          </div>
+          <MarriageCertificateForm data={data} onChange={handleChange} />
+        </aside>
+
+        {/* Right Panel: Document Preview */}
+        <section className="flex-1 bg-slate-100 flex justify-center items-start overflow-y-auto relative py-4 md:py-8 print:bg-transparent print:p-0 print:overflow-visible">
+          <div id="marriage-preview-container" className="shadow-2xl print:shadow-none bg-white scale-[0.6] sm:scale-75 md:scale-[0.85] lg:scale-100 transform-origin-top">
+            <MarriageCertificatePreview data={data} />
           </div>
         </section>
       </main>
     </div>
   );
-};
-
-export default MarriageCertificateApp;
+}

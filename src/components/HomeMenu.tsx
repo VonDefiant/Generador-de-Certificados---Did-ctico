@@ -18,7 +18,7 @@ export default function HomeMenu({ onSelect }: HomeMenuProps) {
             Generador de Certificados RENAP
           </h1>
           <div className="mb-6">
-             <span className="inline-flex items-center justify-center bg-rose-100 text-rose-700 px-4 py-1.5 rounded-full text-sm font-medium tracking-wide">
+             <span className="inline-flex items-center justify-center bg-amber-100 text-amber-700 px-4 py-1.5 rounded-full text-sm font-medium tracking-wide">
                Para Gaby Hernández
              </span>
           </div>
