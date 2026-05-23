@@ -1,0 +1,8 @@
+{
+  "name": "Generador de Certificados - Didáctico",
+  "description": "Una herramienta educativa para generar certificados de defunción con formato editable y exportación a PDF, diseñada para simular documentos del RENAP para enseñanza.",
+  "requestFramePermissions": [],
+  "majorCapabilities": [
+    "MAJOR_CAPABILITY_SERVER_SIDE_GEMINI_API"
+  ]
+}

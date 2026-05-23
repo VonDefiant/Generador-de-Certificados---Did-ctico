@@ -1,0 +1,38 @@
+@import "tailwindcss";
+
+@layer utilities {
+  .print-break-inside-avoid {
+    break-inside: avoid;
+  }
+}
+
+@media print {
+  body {
+    background-color: white;
+    -webkit-print-color-adjust: exact;
+    print-color-adjust: exact;
+  }
+  
+  .no-print {
+    display: none !important;
+  }
+  
+  .print-only {
+    display: block !important;
+  }
+  
+  /* Reset margins for A4 printing */
+  @page {
+    size: A4 portrait;
+    margin: 1cm;
+  }
+
+  .document-preview {
+    width: 100% !important;
+    max-width: none !important;
+    box-shadow: none !important;
+    border: none !important;
+    padding: 0 !important;
+    margin: 0 !important;
+  }
+}
