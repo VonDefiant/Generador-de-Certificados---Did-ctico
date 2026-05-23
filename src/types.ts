@@ -122,6 +122,41 @@ export interface BirthCertificateData {
   codigoBottom: string;
 }
 
+export interface MarriageCertificateData {
+  correlativo: string;
+  verificador: string;
+  
+  municipioCertificacion: string;
+  departamentoCertificacion: string;
+  fechaAsiento: string;
+  municipioAsiento: string;
+  departamentoAsiento: string;
+  numeroMatrimonio: string;
+
+  cuiVaron: string;
+  nombreVaron: string;
+  lugarOrigenVaron: string;
+  ocupacionVaron: string;
+  fotoVaron: string;
+
+  cuiMujer: string;
+  nombreMujer: string;
+  lugarOrigenMujer: string;
+  ocupacionMujer: string;
+  fotoMujer: string;
+
+  lugarMatrimonio: string;
+  fechaMatrimonio: string;
+  capitulaciones: string;
+  regimenEconomico: string;
+  autoridad: string;
+
+  codigoLargo: string;
+  idImpresion: string;
+  fechaImpresion: string;
+  codigoImpresion: string;
+}
+
 export const defaultBirthCertificateData: BirthCertificateData = {
   correlativo: "E0124319516012020",
   verificadorSec1: "2 E8B22952B",
@@ -161,3 +196,39 @@ export const defaultBirthCertificateData: BirthCertificateData = {
   portalEmail: "jf.canov77727@gmail.com",
   codigoBottom: "00000000564819956DFB2EB2A39D80B235295C32C5833FB33AEE5FC",
 };
+
+export const defaultMarriageCertificateData: MarriageCertificateData = {
+  correlativo: "10004131007052020",
+  verificador: "5CE7730CDD07",
+  
+  municipioCertificacion: "San Marcos",
+  departamentoCertificacion: "San Marcos",
+  fechaAsiento: "tres de octubre de dos mil dieciocho",
+  municipioAsiento: "SAN MARCOS",
+  departamentoAsiento: "SAN MARCOS",
+  numeroMatrimonio: "4187",
+
+  cuiVaron: "3301378241201",
+  nombreVaron: "- Dary Aramis , Fuentes Gómez -",
+  lugarOrigenVaron: "GUATEMALA, SAN MARCOS, SAN MARCOS",
+  ocupacionVaron: "- ESTUDIANTE -",
+  fotoVaron: "",
+
+  cuiMujer: "2805976301207",
+  nombreMujer: "- Esmeralda , López Velásquez -",
+  lugarOrigenMujer: "GUATEMALA, SAN MARCOS, TACANÁ",
+  ocupacionMujer: "- ESTUDIANTE -",
+  fotoMujer: "",
+
+  lugarMatrimonio: "GUATEMALA, SAN MARCOS, SAN MARCOS, 12 Calle C 1-26 Zona 1",
+  fechaMatrimonio: "diecinueve de septiembre de dos mil dieciocho",
+  capitulaciones: "NO",
+  regimenEconomico: "COMUNIDAD GANANCIALES",
+  autoridad: "- Licda. Delmy Gabriela Méndez López -",
+
+  codigoLargo: "548C33E477734F838109B7358C9942FD5DD0C79E",
+  idImpresion: "2694463111201",
+  fechaImpresion: "07/05/2020",
+  codigoImpresion: "001E90B48C90",
+};
+

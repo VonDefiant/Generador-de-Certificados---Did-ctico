@@ -14,9 +14,14 @@ export default function HomeMenu({ onSelect }: HomeMenuProps) {
           <div className="inline-flex items-center justify-center w-16 h-16 bg-blue-100 rounded-2xl mb-6 shadow-inner">
             <ShieldCheck className="w-8 h-8 text-blue-600" />
           </div>
-          <h1 className="text-3xl md:text-4xl font-bold text-slate-900 tracking-tight mb-4">
+          <h1 className="text-3xl md:text-4xl font-bold text-slate-900 tracking-tight mb-2">
             Generador de Certificados RENAP
           </h1>
+          <div className="mb-6">
+             <span className="inline-flex items-center justify-center bg-rose-100 text-rose-700 px-4 py-1.5 rounded-full text-sm font-medium tracking-wide">
+               Para Gaby Hernández
+             </span>
+          </div>
           <p className="text-lg text-slate-500 max-w-2xl mx-auto">
             Selecciona el tipo de certificado que deseas generar. Se generará un documento en formato PDF con el diseño oficial para propósitos didácticos.
           </p>
