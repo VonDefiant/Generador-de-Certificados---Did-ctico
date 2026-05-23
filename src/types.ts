@@ -81,3 +81,83 @@ export const defaultCertificateData: CertificateData = {
   fechaInferior: "1841865871601 \n 06/02/2019 09:57:15 am",
   codigoInferior: "REG_178_025",
 };
+
+export interface BirthCertificateData {
+  correlativo: string;
+  verificadorSec1: string;
+  verificadorSec2: string;
+  verificador: string;
+  id: string;
+
+  municipioCertificacion: string;
+  departamentoCertificacion: string;
+  fechaAsiento: string;
+  partida: string;
+  folio: string;
+  libro: string;
+  municipioAsiento: string;
+  departamentoAsiento: string;
+
+  nombreInscrito: string;
+  cuiInscrito: string;
+  fechaNacimientoInscritoText: string;
+  lugarNacimientoInscrito: string;
+  generoInscrito: string;
+  fotoInscrito: string;
+
+  nombreMadre: string;
+  fechaNacimientoMadre: string;
+  lugarOrigenMadre: string;
+  fotoMadre: string;
+
+  nombrePadre: string;
+  fechaNacimientoPadre: string;
+  lugarOrigenPadre: string;
+  fotoPadre: string;
+
+  portal: string;
+  portalFecha: string;
+  portalServicio: string;
+  portalEmail: string;
+  codigoBottom: string;
+}
+
+export const defaultBirthCertificateData: BirthCertificateData = {
+  correlativo: "E0124319516012020",
+  verificadorSec1: "2 E8B22952B",
+  verificadorSec2: "35",
+  verificador: "2E8B22952B35",
+  id: "195018391613",
+
+  municipioCertificacion: "Guatemala",
+  departamentoCertificacion: "Guatemala",
+  fechaAsiento: "cuatro de julio de dos mil seis",
+  partida: "251",
+  folio: "251",
+  libro: "766-N",
+  municipioAsiento: "GUATEMALA",
+  departamentoAsiento: "GUATEMALA",
+
+  nombreInscrito: "- Luis Fernando , Hernandez Someta",
+  cuiInscrito: "3022003120101",
+  fechaNacimientoInscritoText: "Veinticuatro de marzo de dos mil seis",
+  lugarNacimientoInscrito: "Guatemala, Guatemala, Guatemala",
+  generoInscrito: "Masculino",
+  fotoInscrito: "",
+
+  nombreMadre: "- Silvia Jacqueline , Someta Girón",
+  fechaNacimientoMadre: "--",
+  lugarOrigenMadre: "Puerto San Jose, Escuintla, Guatemala",
+  fotoMadre: "",
+
+  nombrePadre: "- Benjamín Antonio , Hernandez Sánchez",
+  fechaNacimientoPadre: "--",
+  lugarOrigenPadre: "Guatemala, Guatemala, Guatemala",
+  fotoPadre: "",
+
+  portal: "RENAPPORTAL",
+  portalFecha: "16/01/2020 1:24:34 p. m.",
+  portalServicio: "ServiciosWeb",
+  portalEmail: "jf.canov77727@gmail.com",
+  codigoBottom: "00000000564819956DFB2EB2A39D80B235295C32C5833FB33AEE5FC",
+};
