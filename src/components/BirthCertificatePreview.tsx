@@ -111,6 +111,22 @@ export default function BirthCertificatePreview({ data }: Props) {
       {/* PARENTS & FOOTER ABSOLUTE SECTION */}
       <div className="relative w-full h-[360px] mt-[10px]">
          
+         {/* Mapa de Guatemala - Centro */}
+         <div className="absolute top-[200px] left-[50%] transform -translate-x-1/2 z-[5]">
+           <img
+             src="/mapa.png"
+             alt="Mapa de Guatemala"
+             className="h-auto object-contain"
+             style={{ 
+               filter: 'grayscale(100%) opacity(0.55)',
+               width: '134px',
+               paddingTop: '0px',
+               marginLeft: '0px',
+               marginTop: '-70px'
+             }}
+           />
+         </div>
+
          {/* Fotos Padres (Center) */}
          <div className="absolute top-0 left-[50%] transform -translate-x-1/2 flex gap-[8px] z-10 bg-transparent">
             {data.fotoMadre ? (
