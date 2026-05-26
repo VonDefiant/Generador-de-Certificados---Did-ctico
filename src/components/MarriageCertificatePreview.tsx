@@ -11,9 +11,8 @@ const MarriageCertificatePreview: React.FC<MarriageCertificatePreviewProps> = ({
   return (
     <div className="bg-white rounded-[2px] shadow-sm flex flex-col justify-between"
          style={{
-           width: '100%',
-           maxWidth: '800px', // Responsive width
-           aspectRatio: '1 / 1.2941', // Letter size (8.5 x 11)
+           width: '800px',
+           height: '1035px',
            position: 'relative',
            overflow: 'hidden',
            margin: '0 auto',
@@ -24,9 +23,9 @@ const MarriageCertificatePreview: React.FC<MarriageCertificatePreviewProps> = ({
            backgroundRepeat: 'no-repeat',
          }}
     >
-      <div className="flex-1 w-full relative z-10 flex flex-col pt-[50px]">
+      <div className="flex-1 w-full relative z-10 flex flex-col pt-[35px]">
         {/* HEADER SECTION */}
-        <div className="flex justify-between items-start mb-[30px] relative">
+        <div className="flex justify-between items-start mb-[15px] relative">
           <div className="flex flex-col">
            <img 
              src="/logo-renap.png" 
@@ -98,7 +97,7 @@ const MarriageCertificatePreview: React.FC<MarriageCertificatePreviewProps> = ({
         </div>
 
         {/* TITLE SECTION */}
-        <div className="flex flex-col items-center text-center mt-[10px] mb-[20px]">
+        <div className="flex flex-col items-center text-center mt-[5px] mb-[10px]">
           <h1 className="text-[15px] font-bold text-gray-900 leading-tight">Registro Civil de las Personas</h1>
           <h2 className="text-[14px] font-bold text-gray-900 mb-[4px] leading-tight">Certificado de Matrimonio</h2>
           <p className="text-[11px] text-gray-900 max-w-[85%] leading-[1.4] mt-[5px]">
@@ -112,7 +111,7 @@ const MarriageCertificatePreview: React.FC<MarriageCertificatePreviewProps> = ({
         </div>
 
         {/* DATOS DEL VARON */}
-        <div className="flex mt-[15px]">
+        <div className="flex mt-[10px]">
            <div className="w-[180px] flex flex-col shrink-0">
              <div className="font-bold text-[13px] text-gray-900 pb-[10px]">
                Datos del Varón
@@ -159,7 +158,7 @@ const MarriageCertificatePreview: React.FC<MarriageCertificatePreviewProps> = ({
         </div>
 
         {/* DATOS DE LA MUJER */}
-        <div className="flex mt-[20px]">
+        <div className="flex mt-[12px]">
            <div className="w-[180px] flex flex-col shrink-0">
              <div className="font-bold text-[13px] text-gray-900 pb-[10px]">
                Datos de la Mujer
@@ -206,7 +205,7 @@ const MarriageCertificatePreview: React.FC<MarriageCertificatePreviewProps> = ({
         </div>
 
         {/* DATOS DEL MATRIMONIO */}
-        <div className="mt-[20px] mb-[15px]">
+        <div className="mt-[12px] mb-[10px]">
            <div className="font-bold text-[13px] text-gray-900 pb-[10px]">
              Datos del Matrimonio
            </div>
@@ -249,7 +248,7 @@ const MarriageCertificatePreview: React.FC<MarriageCertificatePreviewProps> = ({
       </div>
       
       {/* Footer / Info Block Absolute Positioning */}
-      <div className="absolute bottom-[35px] left-0 w-full px-[60px] flex items-end justify-between z-20">
+      <div className="absolute bottom-[25px] left-0 w-full px-[60px] flex items-end justify-between z-20">
          <div className="w-[180px]">
             <p className="text-[11px] font-bold text-gray-900 tracking-wide pb-[5px]">Página 1 de 2</p>
          </div>

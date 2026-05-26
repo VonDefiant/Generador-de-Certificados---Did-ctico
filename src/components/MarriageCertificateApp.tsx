@@ -3,7 +3,7 @@ import { Printer, RefreshCw, Download, ArrowLeft } from 'lucide-react';
 import MarriageCertificateForm from './MarriageCertificateForm';
 import MarriageCertificatePreview from './MarriageCertificatePreview';
 import { MarriageCertificateData, defaultMarriageCertificateData } from '../types';
-import { toPng } from 'html-to-image';
+import { toJpeg } from 'html-to-image';
 import { jsPDF } from 'jspdf';
 
 interface MarriageCertificateAppProps {
@@ -13,6 +13,7 @@ interface MarriageCertificateAppProps {
 export default function MarriageCertificateApp({ onBack }: MarriageCertificateAppProps) {
   const [data, setData] = useState<MarriageCertificateData>(defaultMarriageCertificateData);
   const [isExporting, setIsExporting] = useState(false);
+  const [activeTab, setActiveTab] = useState<'form' | 'preview'>('form');
 
   const handleChange = (data: MarriageCertificateData) => {
     setData(data);
@@ -23,17 +24,27 @@ export default function MarriageCertificateApp({ onBack }: MarriageCertificateAp
     if (!element) return;
 
     setIsExporting(true);
+    
+    // Temporarily remove tailwind scaling classes to ensure full quality capture
+    const originalClassName = element.className;
+    element.className = originalClassName.replace(/scale-\[[^\]]+\]/g, '').replace(/sm:scale-\[[^\]]+\]/g, '').replace(/md:scale-\[[^\]]+\]/g, '').replace(/lg:scale-\[[^\]]+\]/g, '').replace(/xl:scale-\d+/g, '').replace(/min-\[400px\]:scale-\[[^\]]+\]/g, '');
+
     try {
-      const dataUrl = await toPng(element, { quality: 1.0, pixelRatio: 2, backgroundColor: '#ffffff' });
+      const dataUrl = await toJpeg(element, { 
+        quality: 1.0, 
+        pixelRatio: 2, 
+        backgroundColor: '#ffffff'
+      });
       const pdf = new jsPDF('p', 'in', 'letter');
       const imgProps = pdf.getImageProperties(dataUrl);
       const pdfWidth = pdf.internal.pageSize.getWidth();
       const pdfHeight = (imgProps.height * pdfWidth) / imgProps.width;
-      pdf.addImage(dataUrl, 'PNG', 0, 0, pdfWidth, pdfHeight);
+      pdf.addImage(dataUrl, 'JPEG', 0, 0, pdfWidth, pdfHeight);
       pdf.save(`CertificadoDeMatrimonio_${data.cuiVaron}_${data.cuiMujer}.pdf`);
     } catch (e) {
       console.error("Error generating PDF:", e);
     } finally {
+      element.className = originalClassName;
       setIsExporting(false);
     }
   };
@@ -87,10 +98,26 @@ export default function MarriageCertificateApp({ onBack }: MarriageCertificateAp
         </div>
       </header>
 
+      {/* Mobile Tabs */}
+      <div className="md:hidden flex bg-white border-b border-slate-200 no-print flex-shrink-0">
+        <button
+          onClick={() => setActiveTab('form')}
+          className={`flex-1 py-3 text-sm font-semibold transition-colors ${activeTab === 'form' ? 'text-rose-600 border-b-2 border-rose-600' : 'text-slate-500 hover:bg-slate-50'}`}
+        >
+          Formulario
+        </button>
+        <button
+          onClick={() => setActiveTab('preview')}
+          className={`flex-1 py-3 text-sm font-semibold transition-colors ${activeTab === 'preview' ? 'text-rose-600 border-b-2 border-rose-600' : 'text-slate-500 hover:bg-slate-50'}`}
+        >
+          Vista Previa
+        </button>
+      </div>
+
       {/* Main Content */}
       <main className="flex-1 flex flex-col md:flex-row gap-0 overflow-hidden">
         {/* Left Panel: Editor Form (hidden on print) */}
-        <aside className="w-full md:w-[320px] lg:w-[400px] xl:w-[450px] bg-white border-r border-slate-200 flex flex-col p-4 md:p-6 overflow-y-auto space-y-8 no-print shrink-0 max-h-[50vh] md:max-h-full">
+        <aside className={`${activeTab === 'form' ? 'flex' : 'hidden md:flex'} w-full md:w-[320px] lg:w-[400px] xl:w-[450px] bg-white border-r border-slate-200 flex-col p-4 md:p-6 overflow-y-auto space-y-8 no-print shrink-0 md:max-h-full flex-1 md:flex-initial`}>
           <div className="bg-slate-50 border border-slate-100 rounded-lg p-4 text-xs text-slate-500 leading-relaxed italic hidden sm:block">
             Modifica los valores en el formulario. Los cambios se reflejan en tiempo real. Usa "Exportar PDF" para descargar el documento.
           </div>
@@ -98,8 +125,8 @@ export default function MarriageCertificateApp({ onBack }: MarriageCertificateAp
         </aside>
 
         {/* Right Panel: Document Preview */}
-        <section className="flex-1 bg-slate-100 flex justify-center items-start overflow-y-auto relative py-4 md:py-8 print:bg-transparent print:p-0 print:overflow-visible">
-          <div id="marriage-preview-container" className="shadow-2xl print:shadow-none bg-white scale-[0.6] sm:scale-75 md:scale-[0.85] lg:scale-100 transform-origin-top">
+        <section className={`${activeTab === 'preview' ? 'flex' : 'hidden md:flex'} flex-1 bg-slate-100 justify-center items-start overflow-y-auto relative py-4 md:py-8 print:bg-transparent print:p-0 print:overflow-visible print:!flex`}>
+          <div id="marriage-preview-container" className="shadow-2xl print:shadow-none bg-white scale-[0.45] min-[400px]:scale-[0.5] sm:scale-[0.75] md:scale-[0.5] lg:scale-[0.7] xl:scale-100 origin-top">
             <MarriageCertificatePreview data={data} />
           </div>
         </section>
