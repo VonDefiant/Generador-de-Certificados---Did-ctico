@@ -1,4 +1,4 @@
-import { useState } from 'react';
+import { useState, useDeferredValue } from 'react';
 import { Printer, RefreshCw, Download, ArrowLeft } from 'lucide-react';
 import CertificateForm from './CertificateForm';
 import DocumentPreview from './DocumentPreview';
@@ -12,6 +12,7 @@ interface DeathCertificateAppProps {
 
 export default function DeathCertificateApp({ onBack }: DeathCertificateAppProps) {
   const [data, setData] = useState<CertificateData>(defaultCertificateData);
+  const deferredData = useDeferredValue(data);
   const [isExporting, setIsExporting] = useState(false);
   const [activeTab, setActiveTab] = useState<'form' | 'preview'>('form');
 
@@ -130,7 +131,7 @@ export default function DeathCertificateApp({ onBack }: DeathCertificateAppProps
         {/* Right Panel: Document Preview */}
         <section className={`${activeTab === 'preview' ? 'flex' : 'hidden md:flex'} flex-1 bg-slate-100 justify-center items-start overflow-y-auto relative py-4 md:py-8 print:bg-transparent print:p-0 print:overflow-visible print:!flex`}>
           <div id="document-preview-container" className="shadow-2xl print:shadow-none bg-white scale-[0.45] min-[400px]:scale-[0.5] sm:scale-[0.75] md:scale-[0.5] lg:scale-[0.7] xl:scale-100 origin-top">
-            <DocumentPreview data={data} />
+            <DocumentPreview data={deferredData} />
           </div>
         </section>
       </main>
