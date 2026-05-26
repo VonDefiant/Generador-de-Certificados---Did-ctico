@@ -55,7 +55,7 @@ export default function MarriageCertificateApp({ onBack }: MarriageCertificateAp
   };
 
   return (
-    <div className="h-[100dvh] bg-slate-50 flex flex-col overflow-hidden font-sans text-slate-800">
+    <div className="min-h-screen bg-slate-50 flex flex-col md:h-screen md:overflow-hidden font-sans text-slate-800">
       {/* Navbar - hidden on print */}
       <header className="h-16 bg-white border-b border-slate-200 px-4 md:px-8 flex items-center justify-between shadow-sm flex-shrink-0 no-print">
         <div className="flex items-center gap-3">
@@ -116,9 +116,9 @@ export default function MarriageCertificateApp({ onBack }: MarriageCertificateAp
       </div>
 
       {/* Main Content */}
-      <main className="flex-1 flex flex-col md:flex-row gap-0 overflow-hidden">
+      <main className="flex-1 flex flex-col md:flex-row gap-0 md:overflow-hidden">
         {/* Left Panel: Editor Form (hidden on print) */}
-        <aside className={`${activeTab === 'form' ? 'flex' : 'hidden md:flex'} w-full md:w-[320px] lg:w-[400px] xl:w-[450px] bg-white border-r border-slate-200 flex-col p-4 md:p-6 overflow-y-auto space-y-8 no-print shrink-0 md:max-h-full flex-1 md:flex-initial`}>
+        <aside className={`${activeTab === 'form' ? 'flex' : 'hidden md:flex'} w-full md:w-[320px] lg:w-[400px] xl:w-[450px] bg-white border-r border-slate-200 flex-col p-4 md:p-6 md:overflow-y-auto space-y-8 no-print shrink-0 md:max-h-full flex-1 md:flex-initial`}>
           <div className="bg-slate-50 border border-slate-100 rounded-lg p-4 text-xs text-slate-500 leading-relaxed italic hidden sm:block">
             Modifica los valores en el formulario. Los cambios se reflejan en tiempo real. Usa "Exportar PDF" para descargar el documento.
           </div>
