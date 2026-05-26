@@ -58,7 +58,7 @@ export default function DeathCertificateApp({ onBack }: DeathCertificateAppProps
   };
 
   return (
-    <div className="h-screen bg-slate-50 flex flex-col overflow-hidden font-sans text-slate-800">
+    <div className="h-[100dvh] bg-slate-50 flex flex-col overflow-hidden font-sans text-slate-800">
       {/* Navbar - hidden on print */}
       <header className="h-16 bg-white border-b border-slate-200 px-4 md:px-8 flex items-center justify-between shadow-sm flex-shrink-0 no-print">
         <div className="flex items-center gap-3">

@@ -1,3 +1,4 @@
+import React from 'react';
 import { BirthCertificateData } from '../types';
 import QRCode from 'react-qr-code';
 
@@ -5,7 +6,7 @@ interface Props {
   data: BirthCertificateData;
 }
 
-export default function BirthCertificatePreview({ data }: Props) {
+function BirthCertificatePreview({ data }: Props) {
   return (
     <div className="bg-white text-black text-sm max-w-[800px] w-[800px] mx-auto document-preview relative overflow-hidden font-sans" 
          style={{ 
@@ -232,3 +233,5 @@ export default function BirthCertificatePreview({ data }: Props) {
     </div>
   );
 }
+
+export default React.memo(BirthCertificatePreview);

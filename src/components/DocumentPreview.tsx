@@ -27,7 +27,7 @@ const Field = ({
   </div>
 );
 
-export default function DocumentPreview({ data }: DocumentPreviewProps) {
+const DocumentPreview = React.memo(({ data }: DocumentPreviewProps) => {
   return (
     <div className="bg-white w-[210mm] min-h-[297mm] shadow-lg document-preview mx-auto flex flex-col pt-10 pb-16 px-12 text-gray-800 font-sans relative">
       
@@ -177,4 +177,6 @@ export default function DocumentPreview({ data }: DocumentPreviewProps) {
 
     </div>
   );
-}
+});
+
+export default DocumentPreview;

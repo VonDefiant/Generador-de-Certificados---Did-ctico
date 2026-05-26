@@ -278,4 +278,4 @@ const MarriageCertificatePreview: React.FC<MarriageCertificatePreviewProps> = ({
   );
 };
 
-export default MarriageCertificatePreview;
+export default React.memo(MarriageCertificatePreview);
